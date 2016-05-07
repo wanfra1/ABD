@@ -2,8 +2,9 @@
  * Funciones usadas en la aplicación Gestión de stockaje
  */
 function anadirProducto() {
-	var listaProductos = document.getElementsByClassName("divProductos")[0].children;
-	var nuevoIndice = listaProductos.length;
+	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
+	var nuevoIndice = parseInt(document.getElementsByClassName("divProductos")[0].children[numProductos - 1].id
+			.substring(8)) + 1;
 
 	document.getElementsByClassName("divProductos")[0].innerHTML = document
 			.getElementsByClassName("divProductos")[0].innerHTML
