@@ -34,5 +34,10 @@ function anadirProducto() {
 }
 
 function eliminarProducto(objeto) {
-	objeto.parentElement.remove();
+	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
+	if (numProductos > 1) {		
+		objeto.parentElement.remove();
+	} else {
+		alert("Tienes que introducir al menos un producto");
+	}
 }
