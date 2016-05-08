@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2016 a las 17:52:36
+-- Tiempo de generación: 08-05-2016 a las 21:39:38
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -139,6 +139,18 @@ INSERT INTO `stock_producto` (`ID`, `ID_CATEGORIA`, `NOMBRE`, `DESCRIPCION`, `PR
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `stock_producto_almacen`
+--
+
+CREATE TABLE `stock_producto_almacen` (
+  `ID_ALMACEN` int(11) NOT NULL,
+  `ID_PRODUCTO` int(11) NOT NULL,
+  `UNIDADES` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla para guardar el stock de almacen';
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `stock_proveedor`
 --
 
@@ -237,6 +249,13 @@ ALTER TABLE `stock_pedido`
 ALTER TABLE `stock_producto`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID_CATEGORIA` (`ID_CATEGORIA`);
+
+--
+-- Indices de la tabla `stock_producto_almacen`
+--
+ALTER TABLE `stock_producto_almacen`
+  ADD PRIMARY KEY (`ID_ALMACEN`,`ID_PRODUCTO`),
+  ADD KEY `ID_PRODUCTO` (`ID_PRODUCTO`);
 
 --
 -- Indices de la tabla `stock_proveedor`
@@ -340,6 +359,13 @@ ALTER TABLE `stock_pedido`
 --
 ALTER TABLE `stock_producto`
   ADD CONSTRAINT `stock_producto_ibfk_1` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `stock_categoria` (`ID`);
+
+--
+-- Filtros para la tabla `stock_producto_almacen`
+--
+ALTER TABLE `stock_producto_almacen`
+  ADD CONSTRAINT `stock_producto_almacen_ibfk_1` FOREIGN KEY (`ID_ALMACEN`) REFERENCES `stock_almacen` (`ID`),
+  ADD CONSTRAINT `stock_producto_almacen_ibfk_2` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `stock_producto` (`ID`);
 
 --
 -- Filtros para la tabla `stock_suministro`
