@@ -3,18 +3,29 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Registrar pedido</title>
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
 	</head>
 	<body>
 		Registrar pedido!
 		<div id="divForm">
 			<?php include 'comun.php';?>
-			<?php
-				$database = new DataBase();
-				$result = $database->getQuery('SELECT * FROM `stock_categoria`');
-				foreach ($result as $row) {
-					echo "$row[1] <br>";
-				}
-			?>
+			<table >
+				<caption>Tabla de categorías</caption>
+
+				<tr> <th>Id</th> <th>Categoría</th> </tr>
+				<?php
+					$database = new DataBase();
+					$result = $database->getQuery('SELECT * FROM `stock_categoria`');
+					foreach ($result as $row) {
+
+						echo "<tr> <td>$row[0]</td> <td>$row[1]</td> </tr>";
+
+					}
+				?>
+
+
+			</table>
+
 			<form method="post" action="Pedidos.php" enctype="multipart/form-data">
 				<div id="divDatosPedido">
 					<fieldset>
