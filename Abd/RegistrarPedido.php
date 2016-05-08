@@ -15,7 +15,7 @@
 					echo "$row[1] <br>";
 				}
 			?>
-			<form method="post" action="solicitarPedido.php" enctype="multipart/form-data">
+			<form method="post" action="Pedidos.php" enctype="multipart/form-data">
 				<div id="divDatosPedido">
 					<fieldset>
 						<legend>Datos del almacen</legend>
