@@ -1,10 +1,32 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wanfra
- * Date: 08/05/2016
- * Time: 19:48
- */
-    $database = new PDO('mysql:host=localhost;dbname=almacen_tienda_stock;charset=utf8_general_ci', 'root', '');
-    $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $database->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+class DataBase {
+    private $hostname = 'localhost';
+    private $username = 'root';
+    private $password = '';
+    private $dbName = 'almacen_tienda_stock';
+    public $dbh = NULL;
+    public function __construct() {
+        try  {
+            $this->dbh = new PDO("mysql:host=$this->hostname;dbname=$this->dbName", $this->username, $this->password);
+        } catch(PDOException $e) {
+            echo __LINE__.$e->getMessage();
+        }
+    }
+    public function __destruct() {
+        $this->dbh = NULL; // Setting the handler to NULL closes the connection propperly
+    }
+    public function runQuery($sql) {
+        try {
+            $count = $this->dbh->exec($sql) or print_r($this->dbh->errorInfo());
+        }
+        catch(PDOException $e) {
+            echo __LINE__.$e->getMessage();
+        }
+    }
+    public function getQuery($sql) {
+        $stmt = $this->dbh->query($sql);
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
+    }
+}
+?>

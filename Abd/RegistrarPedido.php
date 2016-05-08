@@ -7,6 +7,14 @@
 	<body>
 		Registrar pedido!
 		<div id="divForm">
+			<?php include 'comun.php';?>
+			<?php
+				$database = new DataBase();
+				$result = $database->getQuery('SELECT * FROM `stock_categoria`');
+				foreach ($result as $row) {
+					echo "$row[1] <br>";
+				}
+			?>
 			<form method="post" action="solicitarPedido.php" enctype="multipart/form-data">
 				<div id="divDatosPedido">
 					<fieldset>
