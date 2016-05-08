@@ -5,7 +5,7 @@
 		<title>Registrar pedido</title>
 	</head>
 	<body>
-		Registrar pedido!
+		Registrar pedido con caca!
 		<div id="divForm">
 			<form method="post" action="solicitarPedido.php" enctype="multipart/form-data">
 				<div id="divDatosPedido">
