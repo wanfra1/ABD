@@ -17,8 +17,8 @@
                 $ventas = new Ventas();
                 $tiendas = $ventas->tiendas();
                 foreach ($tiendas as $row) {
-                    echo $row[0];
-                    echo '<option value="caca">Opcion 1</option>';
+                    echo $row[1];
+                    echo '<option value="'.$row[0].'">'.$row[1].'</option>';
                 }
             ?>
         </select>
