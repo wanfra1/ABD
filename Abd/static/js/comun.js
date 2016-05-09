@@ -3,8 +3,7 @@
  */
 function anadirProducto(productos) {
 	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
-	var nuevoIndice = parseInt(document.getElementsByClassName("divProductos")[0].children[numProductos - 1].id
-			.substring(8)) + 1;
+	var nuevoIndice = parseInt(numProductos);
 
 	document.getElementsByClassName("divProductos")[0].innerHTML = document
 			.getElementsByClassName("divProductos")[0].innerHTML
