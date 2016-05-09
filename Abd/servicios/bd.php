@@ -28,5 +28,9 @@ class BaseDatos {
         $stmt = $this->dbh->query($sql);
         return $stmt;
     }
+    public function insertarConId($sql) {
+        $this->runQuery($sql);
+        return $this->dbh->lastInsertId();
+    }
 }
 ?>
