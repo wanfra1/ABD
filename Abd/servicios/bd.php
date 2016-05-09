@@ -26,7 +26,6 @@ class BaseDatos {
     }
     public function getQuery($sql) {
         $stmt = $this->dbh->query($sql);
-        $stmt->fetch(PDO::FETCH_ASSOC);
         return $stmt;
     }
 }

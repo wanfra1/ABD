@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1>Nueva venta</h1>
-<?php include '../../servicios/ventas.php';?>
+<?php include '../../servicios/tiendas.php';?>
+<?php include '../../servicios/almacenes.php';?>
 <div id="divForm">
     <form method="post" action="crearVenta.php" enctype="multipart/form-data">
         <label id="label_descripcion" for="descripcion">Descripcion:</label>
@@ -14,14 +15,26 @@
         <label id="label_tienda" for="tienda">Tienda:</label>
         <select id="tienda" name="tienda">
             <?php
-                $ventas = new Ventas();
-                $tiendas = $ventas->tiendas();
-                foreach ($tiendas as $row) {
-                    echo $row[1];
+                $tiendas = new Tiendas();
+                $todos = $tiendas->todos();
+                foreach ($todos as $row) {
                     echo '<option value="'.$row[0].'">'.$row[1].'</option>';
                 }
             ?>
         </select>
+        <label id="label_almacen" for="almacen">Almacen:</label>
+        <select id="almacen" name="almacen">
+            <?php
+            $almacenes = new Almacenes();
+            $todos = $almacenes->todos();
+            foreach (todos as $row) {
+                echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+            }
+            ?>
+        </select>
+        <div id="productos">
+
+        </div>
         <div id="divSubmit">
             <button id="submit" type="submit">Enviar</button>
         </div>

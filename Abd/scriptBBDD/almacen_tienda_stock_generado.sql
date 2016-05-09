@@ -180,6 +180,7 @@ CREATE TABLE `stock_suministro` (
 
 CREATE TABLE `stock_tienda` (
   `ID` int(11) NOT NULL,
+  `NOMBRE` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `TELEFONO` int(11) DEFAULT NULL,
   `DIRECCION` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `PAIS` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
