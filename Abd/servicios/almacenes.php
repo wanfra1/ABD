@@ -1,5 +1,4 @@
 <?php
-include 'bd.php';
 
 class Almacenes {
     public function todos() {

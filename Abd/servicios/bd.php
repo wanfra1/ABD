@@ -3,7 +3,7 @@ class BaseDatos {
     private $hostname = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $dbName = 'almacen_tienda_stock';
+    private $dbName = 'torrix_almacenes';
     private $charset = 'utf8';
     public $dbh = NULL;
     public function __construct() {

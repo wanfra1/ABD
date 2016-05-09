@@ -1,24 +1,26 @@
 /**
  * Funciones usadas en la aplicación Gestión de stockaje
  */
-function anadirProducto() {
+function anadirProducto(productos) {
 	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
 	var nuevoIndice = parseInt(document.getElementsByClassName("divProductos")[0].children[numProductos - 1].id
 			.substring(8)) + 1;
 
 	document.getElementsByClassName("divProductos")[0].innerHTML = document
 			.getElementsByClassName("divProductos")[0].innerHTML
-			+ "<div id='producto"
-			+ nuevoIndice
+			+ "<div id='producto" + nuevoIndice
 			+ "'><label id='label_idProducto"
 			+ nuevoIndice
 			+ "' for='idProducto"
 			+ nuevoIndice
-			+ "'>Producto:</label><input id='idProducto"
+			+ "'>Producto:</label><select id='idProducto"
 			+ nuevoIndice
 			+ "' name='idProducto"
 			+ nuevoIndice
-			+ "' type='text' maxlength='8'/><label id='label_cantProducto"
+			+ "'>"
+			+ opcionesProducto(productos)
+			+ "</select>"
+			+ "<label id='label_cantProducto"
 			+ nuevoIndice
 			+ "' for='cantProducto"
 			+ nuevoIndice
@@ -31,6 +33,19 @@ function anadirProducto() {
 			+ "' name='botEliminar"
 			+ nuevoIndice
 			+ "' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
+}
+
+/**
+ * Carga las opciones a partir de la lista de productos.
+ * @param productos Lista de productos
+ * @returns {string}
+ */
+function opcionesProducto(productos) {
+	var opciones = '';
+	for (i = 0; i < productos.length; i++) {
+		opciones+= '<option value="' + productos[i].id + '">' + productos[i].nombre + ' </option>';
+	}
+	return opciones;
 }
 
 function eliminarProducto(objeto) {
