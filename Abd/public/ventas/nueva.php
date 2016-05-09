@@ -65,6 +65,9 @@
 ?>
 <div id="divForm">
     <form id="venta" onsubmit="return validarVenta()" method="post" action="nueva.php" enctype="multipart/form-data">
+        <div>
+            <span id="errorProductoVacio"></span>
+        </div>
         <label id="label_descripcion" for="descripcion">Descripcion:</label>
         <input type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
         <span id="erroresDescripcion"><?php echo $errorDescripcion; ?></span>

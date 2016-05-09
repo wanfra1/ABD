@@ -75,9 +75,18 @@ function validarVenta() {
 	var numProductos = parseInt(document.getElementsByClassName("divProductos")[0].children.length) - 1;
 	var i = 1;
 	var sonNumericos = true;
+	if (numProductos == 0) {
+		document.getElementById('errorProductoVacio').innerHTML = 'Debe introducir al menos un producto';
+	} else {
+		document.getElementById('errorProductoVacio').innerHTML = '';
+	}
 	while (i <= numProductos && sonNumericos) {
 		var cantidad = document.forms["venta"]["cantProducto" + i].value;
-		if (isNaN(cantidad)) {
+		if (cantidad == null || cantidad == undefined  || cantidad == "") {
+			document.getElementById('errorCant' + i).innerHTML = 'Debe introducir una cantidad';
+			sonNumericos = false;
+			exito = false;
+		} else if (isNaN(cantidad)) {
 			document.getElementById('errorCant' + i).innerHTML = 'Debe ser numerico';
 			sonNumericos = false;
 			exito = false;
