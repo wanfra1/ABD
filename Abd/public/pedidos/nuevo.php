@@ -17,8 +17,9 @@
 				<tr> <th>Id</th> <th>Categoría</th> </tr>
 				<?php
 				$categorias = new Categorias();
+                $todas = $categorias->todas();
 
-				foreach ($categorias as $row) {
+				foreach ($todas as $row) {
 
 					echo "<tr> <td>$row[0]</td> <td>$row[1]</td> </tr>";
 

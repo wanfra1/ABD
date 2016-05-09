@@ -1,8 +1,7 @@
 <?php
-include 'bd.php';
 
 class Categorias {
-    public function categorias() {
+    public function todas() {
         $bd = new BaseDatos();
         return $bd->getQuery('SELECT * FROM `stock_categoria`');
     }
