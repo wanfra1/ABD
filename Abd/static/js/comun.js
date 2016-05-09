@@ -31,7 +31,7 @@ function anadirProducto(productos) {
 			+ nuevoIndice
 			+ "' name='botEliminar"
 			+ nuevoIndice
-			+ "' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
+			+ "' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id='errorCant" + nuevoIndice + "'></span></div>";
 }
 
 /**
@@ -54,4 +54,37 @@ function eliminarProducto(objeto) {
 	} else {
 		alert("Tienes que introducir al menos un producto");
 	}
+}
+
+function validarVenta() {
+	var descripcion = document.forms["venta"]["descripcion"].value;
+	var exito = true;
+	if (descripcion == null || descripcion == "") {
+		document.getElementById('erroresDescripcion').innerHTML = 'Debe rellenar la descripción';
+		exito = false;
+	} else {
+		document.getElementById('erroresDescripcion').innerHTML = '';
+	}
+	var almacen = document.forms["venta"]["almacen"].value;
+	if (almacen == null || almacen == "") {
+		document.getElementById('erroresAlmacen').innerHTML = 'Debe rellenar la descripción';
+		exito = false;
+	} else {
+		document.getElementById('erroresAlmacen').innerHTML = '';
+	}
+	var numProductos = parseInt(document.getElementsByClassName("divProductos")[0].children.length) - 1;
+	var i = 1;
+	var sonNumericos = true;
+	while (i <= numProductos && sonNumericos) {
+		var cantidad = document.forms["venta"]["cantProducto" + i].value;
+		if (isNaN(cantidad)) {
+			document.getElementById('errorCant' + i).innerHTML = 'Debe ser numerico';
+			sonNumericos = false;
+			exito = false;
+		} else {
+			document.getElementById('errorCant' + i).innerHTML = '';
+		}
+		i++;
+	}
+	return exito;
 }

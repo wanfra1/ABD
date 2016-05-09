@@ -59,14 +59,15 @@
         if (!$conError) {
             $ventas = new Ventas();
             $ventas->guardar($almacen, $descripcion, $productosExistentes);
+            header("Location: lista.php?mensaje='Has creado la venta con exito");
         }
     }
 ?>
 <div id="divForm">
-    <form method="post" action="nueva.php" enctype="multipart/form-data">
+    <form id="venta" onsubmit="return validarVenta()" method="post" action="nueva.php" enctype="multipart/form-data">
         <label id="label_descripcion" for="descripcion">Descripcion:</label>
         <input type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
-        <?php echo $errorDescripcion; ?>
+        <span id="erroresDescripcion"><?php echo $errorDescripcion; ?></span>
         <label id="label_almacen" for="almacen">Almacén:</label>
         <select id="almacen" name="almacen">
             <?php
@@ -82,7 +83,7 @@
             }
             ?>
         </select>
-        <?php echo $errorAlmacen; ?>
+        <span id="erroresAlmacen"><?php echo $errorAlmacen; ?></span>
         <div id="divProductos" class="divProductos">
             <?php
                 foreach ($productosExistentes as $i=>$producto) {
@@ -118,7 +119,7 @@
             ?>
         </div>
         <div id="divSubmit">
-            <button id="submit" type="submit">Enviar</button>
+            <input id="submit" type="submit" value="Enviar">
         </div>
     </form>
 </div>

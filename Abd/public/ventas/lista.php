@@ -12,6 +12,11 @@
 <?php include '../../servicios/productos.php';?>
 
 <div id="listaVentas">
+    <?php
+        if (isset($_GET['mensaje'])) {
+            echo $_GET['mensaje'];
+        }
+    ?>
         <table id="ventas">
             <tr>
                 <th>ID</th>
