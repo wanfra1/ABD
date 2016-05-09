@@ -75,18 +75,6 @@ CREATE TABLE `stock_lineapedido` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `stock_lineasuministro`
---
-
-CREATE TABLE `stock_lineasuministro` (
-  `ID_SUMINISTRO` int(11) NOT NULL,
-  `ID_PRODUCTO` int(11) NOT NULL,
-  `UNIDADES` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla para guardar las lineas de suministros de los almacenes hacia las tiendas';
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `stock_lineaventa`
 --
 
@@ -164,40 +152,13 @@ CREATE TABLE `stock_proveedor` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `stock_suministro`
---
-
-CREATE TABLE `stock_suministro` (
-  `ID` int(11) NOT NULL,
-  `ID_TIENDA` int(11) NOT NULL,
-  `ID_ALMACEN` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla para guardar los suministros de los almacenes hacia las tiendas';
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `stock_tienda`
---
-
-CREATE TABLE `stock_tienda` (
-  `ID` int(11) NOT NULL,
-  `NOMBRE` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `TELEFONO` int(11) DEFAULT NULL,
-  `DIRECCION` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `PAIS` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `CIUDAD` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `COD_POSTAL` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla para guardar las tiendas';
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `stock_venta`
 --
 
 CREATE TABLE `stock_venta` (
   `ID` int(11) NOT NULL,
-  `ID_TIENDA` int(11) NOT NULL
+  `ID_ALMACEN` int(11) NOT NULL,
+  `DESCRIPCION` VARCHAR(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Tabla para guardar los datos de las ventas';
 
 --
@@ -221,13 +182,6 @@ ALTER TABLE `stock_categoria`
 --
 ALTER TABLE `stock_lineapedido`
   ADD PRIMARY KEY (`ID_PEDIDO`,`ID_PRODUCTO`),
-  ADD KEY `ID_PRODUCTO` (`ID_PRODUCTO`);
-
---
--- Indices de la tabla `stock_lineasuministro`
---
-ALTER TABLE `stock_lineasuministro`
-  ADD PRIMARY KEY (`ID_SUMINISTRO`,`ID_PRODUCTO`),
   ADD KEY `ID_PRODUCTO` (`ID_PRODUCTO`);
 
 --
@@ -266,24 +220,11 @@ ALTER TABLE `stock_proveedor`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `stock_suministro`
---
-ALTER TABLE `stock_suministro`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID_TIENDA` (`ID_TIENDA`);
-
---
--- Indices de la tabla `stock_tienda`
---
-ALTER TABLE `stock_tienda`
-  ADD PRIMARY KEY (`ID`);
-
---
 -- Indices de la tabla `stock_venta`
 --
 ALTER TABLE `stock_venta`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID_TIENDA` (`ID_TIENDA`);
+  ADD KEY `ID_ALMACEN` (`ID_ALMACEN`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -310,16 +251,6 @@ ALTER TABLE `stock_pedido`
 ALTER TABLE `stock_producto`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
--- AUTO_INCREMENT de la tabla `stock_suministro`
---
-ALTER TABLE `stock_suministro`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `stock_tienda`
---
-ALTER TABLE `stock_tienda`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `stock_venta`
 --
 ALTER TABLE `stock_venta`
@@ -334,13 +265,6 @@ ALTER TABLE `stock_venta`
 ALTER TABLE `stock_lineapedido`
   ADD CONSTRAINT `stock_lineapedido_ibfk_1` FOREIGN KEY (`ID_PEDIDO`) REFERENCES `stock_pedido` (`ID`),
   ADD CONSTRAINT `stock_lineapedido_ibfk_2` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `stock_producto` (`ID`);
-
---
--- Filtros para la tabla `stock_lineasuministro`
---
-ALTER TABLE `stock_lineasuministro`
-  ADD CONSTRAINT `stock_lineasuministro_ibfk_1` FOREIGN KEY (`ID_SUMINISTRO`) REFERENCES `stock_suministro` (`ID`),
-  ADD CONSTRAINT `stock_lineasuministro_ibfk_2` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `stock_producto` (`ID`);
 
 --
 -- Filtros para la tabla `stock_lineaventa`
@@ -370,16 +294,10 @@ ALTER TABLE `stock_producto_almacen`
   ADD CONSTRAINT `stock_producto_almacen_ibfk_2` FOREIGN KEY (`ID_PRODUCTO`) REFERENCES `stock_producto` (`ID`);
 
 --
--- Filtros para la tabla `stock_suministro`
---
-ALTER TABLE `stock_suministro`
-  ADD CONSTRAINT `stock_suministro_ibfk_1` FOREIGN KEY (`ID_TIENDA`) REFERENCES `stock_tienda` (`ID`);
-
---
 -- Filtros para la tabla `stock_venta`
 --
 ALTER TABLE `stock_venta`
-  ADD CONSTRAINT `stock_venta_ibfk_1` FOREIGN KEY (`ID_TIENDA`) REFERENCES `stock_tienda` (`ID`);
+  ADD CONSTRAINT `stock_venta_ibfk_1` FOREIGN KEY (`ID_ALMACEN`) REFERENCES `stock_almacen` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
