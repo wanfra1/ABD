@@ -27,7 +27,8 @@ class Ventas {
             foreach ($productosVendidos as $producto) {
                 $stockActual = $bd->getQuery('SELECT * FROM `stock_producto_almacen` WHERE ID_ALMACEN='.$item[1].' AND ID_PRODUCTO='.$producto[1]);
                 foreach ($stockActual as $stock) {
-                    echo 'Se ha borrado con exito';
+                    $unidades = $producto[2] + $stock[2];
+                    echo "Se ha eliminado con exito";
                     $bd->runQuery('UPDATE `stock_producto_almacen` SET unidades='.$unidades.' WHERE ID_ALMACEN='.$item[1].' AND ID_PRODUCTO='.$producto[1]);
                 }
                 $bd->getQuery('DELETE FROM `stock_lineaventa` WHERE ID_VENTA='.$id);
