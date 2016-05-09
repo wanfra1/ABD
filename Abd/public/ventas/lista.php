@@ -27,7 +27,7 @@
                 $ventas = new Ventas();
                 $todos = $ventas->todos();
                 foreach ($todos as $todo) {
-                    echo '<tr><td>'.$todo[0].'</td><td>'.$todo[2].'</td><td><form method="post" action="eliminar.php"><input type="hidden" name="id" value="'.$todo[0].'"><input type="submit" name="eliminar" value="Eliminar"></form><a href="ver.php?id='.$todo[0].'">Ver</a></td></tr>';
+                    echo '<tr><td>'.$todo[0].'</td><td>'.$todo[2].'</td><td><form method="post" action="eliminar.php"><input type="hidden" name="id" value="'.$todo[0].'"><input type="submit" name="eliminar" value="Eliminar"></form></td></tr>';
                 }
             ?>
         </table>
