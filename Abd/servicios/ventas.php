@@ -11,6 +11,11 @@ class Ventas {
         $result = $bd->insertarConId($query);
         foreach ($productosExistentes as $i=>$producto) {
             $bd->getQuery('INSERT INTO `stock_lineaventa` (ID_VENTA, ID_PRODUCTO, UNIDADES) VALUES ('.$result.', '.$producto['producto'].', '.$producto['cantidad'].')');
+            $stockActual = $bd->getQuery('SELECT * FROM `stock_producto_almacen` WHERE ID_ALMACEN='.$almacen.' AND ID_PRODUCTO='.$producto['producto']);
+            foreach ($stockActual as $stock) {
+                $unidades = $stock[2] - $producto['cantidad'];
+                $bd->runQuery('UPDATE `stock_producto_almacen` SET unidades='.$unidades.' WHERE ID_ALMACEN='.$almacen.' AND ID_PRODUCTO='.$producto['producto']);
+            }
         }
         return $result;
     }
