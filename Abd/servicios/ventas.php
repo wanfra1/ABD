@@ -19,4 +19,20 @@ class Ventas {
         }
         return $result;
     }
+    public function eliminar($id) {
+        $bd = new BaseDatos();
+        $venta = $bd->getQuery('SELECT * FROM `stock_venta` WHERE ID='.$id);
+        foreach ($venta as $item) {
+            $productosVendidos = $bd->getQuery('SELECT * FROM `stock_lineaventa` WHERE ID_VENTA='.$id);
+            foreach ($productosVendidos as $producto) {
+                $stockActual = $bd->getQuery('SELECT * FROM `stock_producto_almacen` WHERE ID_ALMACEN='.$item[1].' AND ID_PRODUCTO='.$producto[1]);
+                foreach ($stockActual as $stock) {
+                    echo 'Se ha borrado con exito';
+                    $bd->runQuery('UPDATE `stock_producto_almacen` SET unidades='.$unidades.' WHERE ID_ALMACEN='.$item[1].' AND ID_PRODUCTO='.$producto[1]);
+                }
+                $bd->getQuery('DELETE FROM `stock_lineaventa` WHERE ID_VENTA='.$id);
+            }
+            $bd->getQuery('DELETE FROM `stock_venta` WHERE ID='.$id);
+        }
+    }
 }
