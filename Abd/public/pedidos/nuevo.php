@@ -8,13 +8,25 @@
 <body>
     <h1>Nuevo pedido</h1>
     <?php include '../../servicios/bd.php';?>
+    <?php include '../../servicios/pedidos.php';?>
     <?php include '../../servicios/proveedores.php';?>
     <?php include '../../servicios/almacenes.php';?>
     <?php include '../../servicios/productos.php';?>
     <?php
+
+    function opcionesProducto() {
+        $productos = new Productos();
+        $opciones = '';
+        foreach ($productos->todos() as $producto) {
+            $opciones.= '<option value="'. $producto[0].'">'.$producto[2].'</option>';
+        }
+        return $opciones;
+    }
+    $conError = false;
     $proveedor = '';
     $almacen = '';
     $productos = array();
+    $productosExistentes = array();
     $errorProveedor = '';
     $errorAlmacen = '';
     $errorProductos = array();
@@ -22,14 +34,32 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($_POST['almacen'])) {
             $errorAlmacen = 'Por favor seleccione un almacén';
+            $conError = true;
         } else {
             $almacen = $_POST['almacen'];
         }
 
         if (empty($_POST['proveedor'])) {
             $errorProveedor = 'Por favor seleccione un proveedor';
+            $conError = true;
         } else {
             $proveedor = $_POST['proveedor'];
+        }
+        $i = 1;
+        while (isset($_POST['idProducto'.$i])) {
+            $productosExistentes[] = array(
+                'producto'=>$_POST['idProducto'.$i],
+                'cantidad'=>$_POST['cantProducto'.$i]);
+            if (empty($_POST['idProducto'.$i]) || empty($_POST['cantProducto'.$i])) {
+                $conError = true;
+                $errorProductos[] = 'Seleccione una linea valida';
+            }
+
+            $i++;
+        }
+        if (!$conError) {
+            $pedidos = new Pedidos();
+            $pedidos->guardar($almacen, $proveedor, $productosExistentes);
         }
     }
     ?>
@@ -70,6 +100,33 @@
             <?php echo $errorAlmacen; ?>
             <div id="divProductos" class="divProductos">
                 <?php
+                foreach ($productosExistentes as $i=>$producto) {
+                    echo "<div id='producto".($i + 1)
+                        ."'><label id='label_idProducto"
+                        .($i + 1)
+                        ."' for='idProducto"
+                        .($i + 1)
+                        ."'>Producto:</label><select id='idProducto"
+                        .($i + 1)
+                        ."' name='idProducto"
+                        .($i + 1)
+                        ."'>"
+                        .opcionesProducto()
+                        ."</select>"
+                        ."<label id='label_cantProducto"
+                        .($i + 1)
+                        ."' for='cantProducto"
+                        .($i + 1)
+                        ."'>Cantidad:</label><input id='cantProducto"
+                        .($i + 1)
+                        ."' name='cantProducto"
+                        .($i + 1)
+                        ."' type='text' maxlength='3'/><input id='botEliminar"
+                        .($i + 1)
+                        ."' name='botEliminar"
+                        .($i + 1)
+                        ."' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
+                }
                 $productos = new Productos();
                 $json = $productos->todosJson();
                 echo "<a href='#' id='agregarProducto' onclick='anadirProducto(".$json.")'>Agregar producto</a>";
