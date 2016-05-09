@@ -12,11 +12,16 @@
 <?php include '../../servicios/productos.php';?>
 <?php
 
-    function opcionesProducto() {
+    function opcionesProducto($seleccionado) {
         $productos = new Productos();
         $opciones = '';
         foreach ($productos->todos() as $producto) {
-            $opciones.= '<option value="'. $producto[0].'">'.$producto[2].'</option>';
+            if ($producto[0] == $seleccionado) {
+                $opciones.= '<option value="'. $producto[0].'" selected>'.$producto[2].'</option>';
+            } else {
+                $opciones.= '<option value="'. $producto[0].'">'.$producto[2].'</option>';
+            }
+
         }
         return $opciones;
     }
@@ -52,6 +57,9 @@
             if (empty($_POST['idProducto'.$i]) || empty($_POST['cantProducto'.$i])) {
                 $conError = true;
                 $errorProductos[] = 'Seleccione una linea valida';
+            } else if (!ctype_digit($_POST['cantProducto'.$i])) {
+                $conError = true;
+                $errorProductos[] = 'Debe ser numerico';
             }
 
             $i++;
@@ -100,7 +108,7 @@
                     ."' name='idProducto"
                     .($i + 1)
                     ."'>"
-                    .opcionesProducto()
+                    .opcionesProducto($producto['producto'])
                     ."</select>"
                     ."<label id='label_cantProducto"
                     .($i + 1)
@@ -110,11 +118,11 @@
                     .($i + 1)
                     ."' name='cantProducto"
                     .($i + 1)
-                    ."' type='text' maxlength='3'/><input id='botEliminar"
+                    ."' type='text' maxlength='3' value='".$producto['cantidad']."'/><input id='botEliminar"
                     .($i + 1)
                     ."' name='botEliminar"
                     .($i + 1)
-                    ."' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
+                    ."' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id=".($i + 1)."></span></div>";
                 }
                 $productos = new Productos();
                 $json = $productos->todosJson();
