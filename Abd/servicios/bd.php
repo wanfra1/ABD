@@ -1,36 +1,35 @@
 <?php
 class BaseDatos {
-    private $hostname = 'localhost';
-    private $username = 'root';
+    private $urlBaseDatos = 'localhost';
+    private $usuario = 'root';
     private $password = '';
-    private $dbName = 'torrix_almacenes';
+    private $nombreBaseDatos = 'torrix_almacenes';
     private $charset = 'utf8';
-    public $dbh = NULL;
+    public $driverBaseDatos = NULL;
     public function __construct() {
         try  {
-            $this->dbh = new PDO("mysql:host=$this->hostname;dbname=$this->dbName;charset=$this->charset", $this->username, $this->password);
+            $this->driverBaseDatos = new PDO("mysql:host=$this->urlBaseDatos;dbname=$this->nombreBaseDatos;charset=$this->charset", $this->usuario, $this->password);
         } catch(PDOException $e) {
             echo __LINE__.$e->getMessage();
         }
     }
     public function __destruct() {
-        $this->dbh = NULL; // Setting the handler to NULL closes the connection propperly
+        $this->driverBaseDatos = NULL;
     }
     public function runQuery($sql) {
         try {
-            $count = $this->dbh->exec($sql) or print_r($this->dbh->errorInfo());
-        }
-        catch(PDOException $e) {
+            $count = $this->driverBaseDatos->exec($sql) or print_r($this->driverBaseDatos->errorInfo());
+        }  catch(PDOException $e) {
             echo __LINE__.$e->getMessage();
         }
     }
     public function getQuery($sql) {
-        $stmt = $this->dbh->query($sql);
+        $stmt = $this->driverBaseDatos->query($sql);
         return $stmt;
     }
     public function insertarConId($sql) {
         $this->runQuery($sql);
-        return $this->dbh->lastInsertId();
+        return $this->driverBaseDatos->lastInsertId();
     }
 }
 ?>
