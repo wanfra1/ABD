@@ -2,15 +2,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gestión de Stockage</title>
+<title>Gestión de Almacén</title>
+<link rel="stylesheet" type="text/css" href="./static/css/styles.css">
 </head>
 <body>
-	<?php include 'comun.php';?>
-	<div id="contenedorCentral">
-		<p><a href="RegistrarSuministro.php">Registra suministro</a></p>
-		<p><a href="RegistrarPedido.php">Registrar pedido</a></p>
-		<p><a href="RegistrarVenta.php">Registrar venta</a></p>
-		<p><a href="RegistrarVentaOnline.php">Registrar venta on-line</a></p>
+	<h1 class="page-header col-md-12 centrado">ABD - GESTIÓN DE ALMACÉN</h1>
+	<div id="contenedorCentral" class="centrado">
+		<h3>Gestión de pedidos</h3>
+		<a class="button" href="./public/pedidos/nuevo.php">Registrar pedido</a>
+		<h3>Gestión de proveedores</h3>
+		<a class="button" href="./public/proveedores/nuevo.php">Registrar proveedor</a>
+		<a class="button" href="./public/proveedores/nuevo.php">Editar proveedor existente</a>
+		<h3>Consulta de stock</h3>
+		<a class="button" href="./public/stock/lista.php">Consultar productos en stock</a>
+		<h3>Gestión de ventas</h3>
+		<a class="button" href="./public/ventas/nueva.php">Registrar venta</a>
+		<a class="button" href="./public/ventas/lista.php">Consultar y anular ventas</a>
 	</div>
 </body>
 </html>
