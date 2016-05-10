@@ -3,8 +3,8 @@
  */
 function anadirProducto(productos) {
 	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
-	var nuevoIndice = parseInt(numProductos);
-
+	document.getElementById('numRepeticiones').value = parseInt(document.getElementById('numRepeticiones').value) + 1;
+	var nuevoIndice = parseInt(document.getElementById('numRepeticiones').value);
 	document.getElementsByClassName("divProductos")[0].innerHTML = document
 			.getElementsByClassName("divProductos")[0].innerHTML
 			+ "<div id='producto" + nuevoIndice
@@ -51,6 +51,7 @@ function eliminarProducto(objeto) {
 	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
 	if (numProductos > 1) {		
 		objeto.parentElement.remove();
+		document.getElementById('numRepeticiones').value = parseInt(document.getElementById('numRepeticiones').value) - 1;
 	} else {
 		alert("Tienes que introducir al menos un producto");
 	}
