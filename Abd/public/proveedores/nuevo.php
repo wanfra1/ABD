@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
 </head>
 <body>
-<h1>Nuevo proveedor</h1>
+<h1 class="page-header col-md-12">NUEVO PROVEEDOR</h1>
 <?php include '../../servicios/bd.php';?>
 <?php include '../../servicios/proveedores.php';?>
 <?php
@@ -43,10 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label id="label_telefono" for="telefono">Teléfono:</label>
         <input type="text" name="telefono" id="telefono" value="<?php echo $telefono; ?>">
         <div id="divSubmit">
-            <button id="submit" type="submit">Enviar</button>
+            <button class="button" id="submit" type="submit">Enviar</button>
         </div>
     </form>
 </div>
+<div id="back" class="col-md-6 derecha"><a href="../home/home.php">volver</a> </div>
 <script type="text/javascript" src="../../static/js/comun.js"></script>
 </body>
 </html>

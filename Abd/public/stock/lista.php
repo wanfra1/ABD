@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
 </head>
 <body>
-<h1>Consultar stock</h1>
+<h1 class="page-header col-md-12">CONSULTAR STOCK</h1>
 <?php include '../../servicios/bd.php';?>
 <?php include '../../servicios/stock.php';?>
 <?php include '../../servicios/almacenes.php';?>
@@ -34,6 +34,7 @@
         ?>
     </table>
 </div>
+<div id="back" class="col-md-pull-6 derecha"><a href="../home/home.php">volver</a> </div>
 <script type="text/javascript" src="../../static/js/comun.js"></script>
 </body>
 </html>

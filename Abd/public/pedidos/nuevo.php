@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
 </head>
 <body>
-    <h1>Nuevo pedido</h1>
+    <h1 class="page-header col-md-12">NUEVO PEDIDO</h1>
     <?php include '../../servicios/bd.php';?>
     <?php include '../../servicios/pedidos.php';?>
     <?php include '../../servicios/proveedores.php';?>
@@ -125,7 +125,7 @@
                         .($i + 1)
                         ."' name='botEliminar"
                         .($i + 1)
-                        ."' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
+                        ."' type='button' class='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
                 }
                 $productos = new Productos();
                 $json = $productos->todosJson();
@@ -133,10 +133,11 @@
                 ?>
             </div>
             <div id="divSubmit">
-                <button id="submit" type="submit">Enviar</button>
+                <button class="button" id="submit" type="submit">Enviar</button>
             </div>
         </form>
     </div>
+    <div id="back" class="col-md-6 derecha"><a href="../home/home.php">volver</a> </div>
     <script type="text/javascript" src="../../static/js/comun.js"></script>
 </body>
 </html>

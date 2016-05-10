@@ -38,6 +38,9 @@
     .col-md-1 {
         width: 8.33333333%;
     }
+    .col-md-pull-1, .col-md-pull-2, .col-md-pull-3, .col-md-pull-4, .col-md-pull-5, .col-md-pull-6, .col-md-pull-7, .col-md-pull-8, .col-md-pull-9, .col-md-pull-10, .col-md-pull-11, .col-md-pull-12 {
+        float: right;
+    }
     .col-md-pull-12 {
         right: 100%;
     }
@@ -98,12 +101,18 @@ td, th {
     text-align: left;
 }
 .centrado{
-    text-align: center;
+    text-align: center !important;
+}
+.izquierda{
+    text-align: left !important;
+}
+.derecha{
+    text-align: right !important;
 }
 .page-header {
     padding-bottom: 9px;
     margin: 40px 0 20px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 3px solid #4681A9;
 }
 ul {
     list-style: none;
@@ -146,4 +155,11 @@ li {
 .button:active {
     border-top-color: #1b435e;
     background: #1b435e;
+}
+body {
+    background-image: url("../img/abd_background.png");
+    background-color: gray;
+}
+.thumbnail {
+    width: 480px;
 }
