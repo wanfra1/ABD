@@ -3,8 +3,7 @@
  */
 function anadirProducto(productos) {
 	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
-	document.getElementById('numRepeticiones').value = parseInt(document.getElementById('numRepeticiones').value) + 1;
-	var nuevoIndice = parseInt(document.getElementById('numRepeticiones').value);
+	var nuevoIndice = parseInt(numProductos);
 	document.getElementsByClassName("divProductos")[0].innerHTML = document
 			.getElementsByClassName("divProductos")[0].innerHTML
 			+ "<div id='producto" + nuevoIndice
@@ -51,7 +50,6 @@ function eliminarProducto(objeto) {
 	var numProductos = document.getElementsByClassName("divProductos")[0].children.length;
 	if (numProductos > 1) {		
 		objeto.parentElement.remove();
-		document.getElementById('numRepeticiones').value = parseInt(document.getElementById('numRepeticiones').value) - 1;
 	} else {
 		alert("Tienes que introducir al menos un producto");
 	}
@@ -68,7 +66,7 @@ function validarVenta() {
 	}
 	var almacen = document.forms["venta"]["almacen"].value;
 	if (almacen == null || almacen == "") {
-		document.getElementById('erroresAlmacen').innerHTML = 'Debe rellenar la descripción';
+		document.getElementById('erroresAlmacen').innerHTML = 'Debe rellenar el almacén';
 		exito = false;
 	} else {
 		document.getElementById('erroresAlmacen').innerHTML = '';
@@ -83,6 +81,48 @@ function validarVenta() {
 	}
 	while (i <= numProductos && sonNumericos) {
 		var cantidad = document.forms["venta"]["cantProducto" + i].value;
+		if (cantidad == null || cantidad == undefined  || cantidad == "") {
+			document.getElementById('errorCant' + i).innerHTML = 'Debe introducir una cantidad';
+			sonNumericos = false;
+			exito = false;
+		} else if (isNaN(cantidad)) {
+			document.getElementById('errorCant' + i).innerHTML = 'Debe ser numerico';
+			sonNumericos = false;
+			exito = false;
+		} else {
+			document.getElementById('errorCant' + i).innerHTML = '';
+		}
+		i++;
+	}
+	return exito;
+}
+
+function validarPedido() {
+	var descripcion = document.forms["pedido"]["proveedor"].value;
+	var exito = true;
+	if (descripcion == null || descripcion == "") {
+		document.getElementById('erroresProveedor').innerHTML = 'Debe rellenar el proveedor';
+		exito = false;
+	} else {
+		document.getElementById('erroresProveedor').innerHTML = '';
+	}
+	var almacen = document.forms["pedido"]["almacen"].value;
+	if (almacen == null || almacen == "") {
+		document.getElementById('erroresAlmacen').innerHTML = 'Debe rellenar el almacén';
+		exito = false;
+	} else {
+		document.getElementById('erroresAlmacen').innerHTML = '';
+	}
+	var numProductos = parseInt(document.getElementsByClassName("divProductos")[0].children.length) - 1;
+	var i = 1;
+	var sonNumericos = true;
+	if (numProductos == 0) {
+		document.getElementById('errorProductoVacio').innerHTML = 'Debe introducir al menos un producto';
+	} else {
+		document.getElementById('errorProductoVacio').innerHTML = '';
+	}
+	while (i <= numProductos && sonNumericos) {
+		var cantidad = document.forms["pedido"]["cantProducto" + i].value;
 		if (cantidad == null || cantidad == undefined  || cantidad == "") {
 			document.getElementById('errorCant' + i).innerHTML = 'Debe introducir una cantidad';
 			sonNumericos = false;

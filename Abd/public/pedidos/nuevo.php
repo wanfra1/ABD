@@ -65,7 +65,7 @@
     ?>
 
     <div id="divForm">
-        <form method="post" action="nuevo.php" enctype="multipart/form-data">
+        <form id="pedido" method="post" onsubmit="return validarPedido()" action="nuevo.php" enctype="multipart/form-data">
             <label id="label_proveedor" for="proveedor">Proveedor:</label>
             <select id="proveedor" name="proveedor">
                 <?php
