@@ -18,7 +18,7 @@
     <a href="./static/img/esquemaentidadrelacion.png">
         <img class="thumbnail" src="./static/img/esquemaentidadrelacion.png" alt="esquema">
     </a>
-    <br><br><br><br><br>
+    <br><br><br>
     <a class="button" href="./public/home/home.php">Ir a la aplicación</a>
 </div>
 </body>
