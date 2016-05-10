@@ -138,3 +138,21 @@ function validarPedido() {
 	}
 	return exito;
 }
+
+
+function validaDni(){
+	valor = document.getElementById("nif").value;
+	var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+	var result = true;
+	if( !(/^\d{8}[A-Z]$/.test(valor)) ) {
+		result = false;
+	}
+
+	if(valor.charAt(8) != letras[(valor.substring(0, 8))%23]) {
+		result = false;
+	}
+	if (!result) {
+		document.getElementById("errorDni").innerHTML = "El documento identificativo es incorrecto";
+	}
+	return result;
+}
