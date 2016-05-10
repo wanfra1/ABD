@@ -14,11 +14,16 @@
     <?php include '../../servicios/productos.php';?>
     <?php
 
-    function opcionesProducto() {
+    function opcionesProducto($seleccionado) {
         $productos = new Productos();
         $opciones = '';
         foreach ($productos->todos() as $producto) {
-            $opciones.= '<option value="'. $producto[0].'">'.$producto[2].'</option>';
+            if ($producto[0] == $seleccionado) {
+                $opciones.= '<option value="'. $producto[0].'" selected>'.$producto[2].'</option>';
+            } else {
+                $opciones.= '<option value="'. $producto[0].'">'.$producto[2].'</option>';
+            }
+
         }
         return $opciones;
     }
@@ -66,6 +71,9 @@
 
     <div id="divForm">
         <form id="pedido" method="post" onsubmit="return validarPedido()" action="nuevo.php" enctype="multipart/form-data">
+            <div>
+                <span id="errorProductoVacio"></span>
+            </div>
             <label id="label_proveedor" for="proveedor">Proveedor:</label>
             <select id="proveedor" name="proveedor">
                 <?php
@@ -81,7 +89,7 @@
                 }
                 ?>
             </select>
-            <?php echo $errorProveedor; ?>
+            <span id="erroresProveedor"><?php echo $errorProveedor; ?></span>
             <label id="label_almacen" for="almacen">Almacén:</label>
             <select id="almacen" name="almacen">
                 <?php
@@ -97,7 +105,7 @@
                 }
                 ?>
             </select>
-            <?php echo $errorAlmacen; ?>
+            <span id="erroresAlmacen"><?php echo $errorAlmacen; ?></span>
             <div id="divProductos" class="divProductos">
                 <?php
                 foreach ($productosExistentes as $i=>$producto) {
@@ -111,7 +119,7 @@
                         ."' name='idProducto"
                         .($i + 1)
                         ."'>"
-                        .opcionesProducto()
+                        .opcionesProducto($producto['producto'])
                         ."</select>"
                         ."<label id='label_cantProducto"
                         .($i + 1)
@@ -121,11 +129,11 @@
                         .($i + 1)
                         ."' name='cantProducto"
                         .($i + 1)
-                        ."' type='text' maxlength='3'/><input id='botEliminar"
+                        ."' type='text' maxlength='3' value='".$producto['cantidad']."'/><input id='botEliminar"
                         .($i + 1)
                         ."' name='botEliminar"
                         .($i + 1)
-                        ."' type='button' class='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/></div>";
+                        ."' type='button' class='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id=".($i + 1)."></span></div>";
                 }
                 $productos = new Productos();
                 $json = $productos->todosJson();
@@ -133,7 +141,7 @@
                 ?>
             </div>
             <div id="divSubmit">
-                <button class="button" id="submit" type="submit">Enviar</button>
+                <input class="button" id="submit" type="submit" value="Enviar">
             </div>
         </form>
     </div>
