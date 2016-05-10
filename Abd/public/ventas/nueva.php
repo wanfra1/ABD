@@ -123,7 +123,7 @@
                     .($i + 1)
                     ."' name='botEliminar"
                     .($i + 1)
-                    ."' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id=".($i + 1)."></span></div>";
+                    ."' type='button' class='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id=".($i + 1)."></span></div>";
                 }
                 $productos = new Productos();
                 $json = $productos->todosJson();
