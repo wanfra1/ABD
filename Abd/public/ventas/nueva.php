@@ -78,10 +78,10 @@
             <span id="errorProductoVacio"></span>
         </div>
         <label id="label_descripcion" for="descripcion">Descripcion:</label>
-        <input type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
+        <input class="inputSelect" type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
         <span id="erroresDescripcion"><?php echo $errorDescripcion; ?></span>
         <label id="label_almacen" for="almacen">Almacén:</label>
-        <select id="almacen" name="almacen">
+        <select id="almacen" name="almacen" class="inputSelect">
             <?php
             $almacenes = new Almacenes();
             $todos = $almacenes->todos();

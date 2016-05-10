@@ -36,12 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div id="divForm">
     <form method="post" action="nuevo.php" onsubmit="return validaDni()" enctype="multipart/form-data">
         <label id="label_nif" for="nif">NIF:</label>
-        <input type="text" name="nif" id="nif" maxlength="9" value="<?php echo $nif; ?>">
+        <input class="inputSelect" type="text" name="nif" id="nif" maxlength="9" value="<?php echo $nif; ?>">
         <?php echo $errorNif; ?>
         <label id="label_nombre" for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>">
+        <input  class="inputSelect" type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>">
         <label id="label_telefono" for="telefono">Teléfono:</label>
-        <input type="text" name="telefono" id="telefono" value="<?php echo $telefono; ?>"><br>
+        <input class="inputSelect" type="text" name="telefono" id="telefono" value="<?php echo $telefono; ?>"><br>
         <span id="errorDni"></span>
         <div id="divSubmit">
             <input class="button" id="submit" type="submit" value="Enviar">

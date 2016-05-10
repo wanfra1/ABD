@@ -75,7 +75,7 @@
                 <span id="errorProductoVacio"></span>
             </div>
             <label id="label_proveedor" for="proveedor">Proveedor:</label>
-            <select id="proveedor" name="proveedor">
+            <select class="inputSelect" id="proveedor" name="proveedor">
                 <?php
                 $proveedores = new Proveedores();
                 $todos = $proveedores->todos();
@@ -91,7 +91,7 @@
             </select>
             <span id="erroresProveedor"><?php echo $errorProveedor; ?></span>
             <label id="label_almacen" for="almacen">Almacén:</label>
-            <select id="almacen" name="almacen">
+            <select class="inputSelect" id="almacen" name="almacen">
                 <?php
                 $almacenes = new Almacenes();
                 $todos = $almacenes->todos();
