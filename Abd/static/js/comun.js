@@ -30,7 +30,7 @@ function anadirProducto(productos) {
 			+ nuevoIndice
 			+ "' name='botEliminar"
 			+ nuevoIndice
-			+ "' type='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id='errorCant" + nuevoIndice + "'></span></div>";
+			+ "' type='button' class='button' onclick='eliminarProducto(this)' value='Eliminar de la lista'/><span id='errorCant" + nuevoIndice + "'></span></div>";
 }
 
 /**
