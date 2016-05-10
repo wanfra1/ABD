@@ -129,7 +129,7 @@
                 }
                 $productos = new Productos();
                 $json = $productos->todosJson();
-                echo "<a href='#' id='agregarProducto' onclick='anadirProducto(".$json.")'>Agregar producto</a>";
+                echo "<a href='#' id='agregarProducto' onclick='anadirProducto(".$json.")' class='button'>Agregar producto</a>";
                 ?>
             </div>
             <div id="divSubmit">
