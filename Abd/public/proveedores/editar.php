@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </form>
 </div>
-<div id="back" class="col-md-6 derecha"><a href="../home/home.php">volver</a> </div>
+<div id="back" class="col-md-pull-6 derecha"><a href="../home/home.php">volver</a> </div>
 <script type="text/javascript" src="../../static/js/comun.js"></script>
 </body>
 </html>
