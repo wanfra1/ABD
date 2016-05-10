@@ -17,6 +17,7 @@ class Pedidos {
                 $bd->runQuery('UPDATE `stock_producto_almacen` SET unidades='.$unidades.' WHERE ID_ALMACEN='.$almacen.' AND ID_PRODUCTO='.$producto['producto']);
             }
         }
+        echo 'El pedido se ha guardado con exito';
         return $result;
     }
 }
