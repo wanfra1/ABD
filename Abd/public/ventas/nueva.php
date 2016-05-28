@@ -11,6 +11,7 @@
 <?php include '../../servicios/ventas.php';?>
 <?php include '../../servicios/almacenes.php';?>
 <?php include '../../servicios/productos.php';?>
+<?php include '../../servicios/clientes.php';?>
 <?php
 
     function opcionesProducto($seleccionado) {
@@ -30,10 +31,12 @@
     $descripcion = '';
     $tienda = '';
     $almacen = '';
+    $cliente = '';
     $productosExistentes = array();
     $errorDescripcion = '';
     $errorTienda = '';
     $errorAlmacen = '';
+    $errorCliente = '';
     $errorProductos = array();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -50,6 +53,14 @@
         } else {
             $almacen = $_POST['almacen'];
         }
+
+        if (empty($_POST['cliente'])) {
+            $errorCliente = 'Por favor seleccione un cliente';
+            $conError = true;
+        } else {
+            $cliente = $_POST['cliente'];
+        }
+
         $i = 1;
         while (isset($_POST['idProducto'.$i])) {
             $productosExistentes[] = array(
@@ -67,7 +78,7 @@
         }
         if (!$conError) {
             $ventas = new Ventas();
-            $ventas->guardar($almacen, $descripcion, $productosExistentes);
+            $ventas->guardar($almacen, $descripcion, $productosExistentes, $cliente);
             header("Location: lista.php?mensaje='Has creado la venta con exito");
         }
     }
@@ -96,6 +107,22 @@
             ?>
         </select>
         <span id="erroresAlmacen"><?php echo $errorAlmacen; ?></span>
+        <label id="label_cliente" for="cliente">Cliente:</label>
+        <select id="cliente" name="cliente" class="inputSelect">
+            <?php
+            $clientes = new Clientes();
+            $todos = $clientes->todos();
+            echo '<option value="">Seleccione una opción</option>';
+            foreach ($todos as $row) {
+                if ($row[0] == $almacen) {
+                    echo '<option value="'.$row[0].'" selected>'.$row[1].'</option>';
+                } else {
+                    echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                }
+            }
+            ?>
+        </select>
+        <span id="erroresClientes"><?php echo $errorCliente; ?></span>
         <div id="divProductos" class="divProductos">
             <?php
                 foreach ($productosExistentes as $i=>$producto) {

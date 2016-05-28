@@ -71,6 +71,13 @@ function validarVenta() {
 	} else {
 		document.getElementById('erroresAlmacen').innerHTML = '';
 	}
+	var cliente = document.forms["venta"]["cliente"].value;
+	if (cliente == null || cliente == "") {
+		document.getElementById('erroresCliente').innerHTML = 'Debe rellenar el cliente';
+		exito = false;
+	} else {
+		document.getElementById('erroresCliente').innerHTML = '';
+	}
 	var numProductos = parseInt(document.getElementsByClassName("divProductos")[0].children.length) - 1;
 	var i = 1;
 	var sonNumericos = true;

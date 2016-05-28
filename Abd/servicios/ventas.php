@@ -3,11 +3,11 @@
 class Ventas {
     public function todos() {
         $bd = new BaseDatos();
-        return $bd->getQuery('SELECT * FROM `stock_venta`');
+        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre FROM `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN' );
     }
-    public function guardar($almacen, $descripcion, $productosExistentes) {
+    public function guardar($almacen, $descripcion, $productosExistentes, $cliente) {
         $bd = new BaseDatos();
-        $query = 'INSERT INTO `stock_venta` (ID, ID_ALMACEN, DESCRIPCION) VALUES (NULL, '.$almacen.', "'.$descripcion.'")';
+        $query = 'INSERT INTO `stock_venta` (ID, ID_ALMACEN, DESCRIPCION, cliente, referencia) VALUES (NULL, '.$almacen.', "'.$descripcion.'", '.$cliente.', "'.uniqid().'")';
         $result = $bd->insertarConId($query);
         foreach ($productosExistentes as $i=>$producto) {
             $bd->getQuery('INSERT INTO `stock_lineaventa` (ID_VENTA, ID_PRODUCTO, UNIDADES) VALUES ('.$result.', '.$producto['producto'].', '.$producto['cantidad'].')');

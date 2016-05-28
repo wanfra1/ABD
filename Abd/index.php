@@ -4,22 +4,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Gestión de Almacén</title>
     <link rel="stylesheet" type="text/css" href="./static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-<h1 class="page-header col-md-12 centrado">ABD - GESTIÓN DE ALMACÉN</h1>
-<div id="contenedorCentral">
-    <h3>Propósito de la aplicación</h3>
-    <p>Esta aplicación pretende gestionar la cantidad de producto existentes en los almacenes de una tienda de productos deportivos.</p>
-    <h4>Entidades</h4>
-    <p>Como entidades físicas del negocio tenemos los productos, los almacenes y los proveedores.</p>
-    <p>Las ventas y los pedidos son las acciones que alteran el estado del stock.</p>
-    <p>Para modelar dichas alteraciones nos hemos apoyado en unas entidades relacionales como son línea de venta, línea de pedido, etc.</p>
-    <p>Podemos ver las relaciones en la siguiente imagen</p>
-    <a href="./static/img/esquemaentidadrelacion.png">
-        <img class="thumbnail" src="./static/img/esquemaentidadrelacion.png" alt="esquema">
-    </a>
-    <br><br><br>
-    <a class="button" href="./public/home/home.php">Ir a la aplicación</a>
+<nav class="navbar navbar-inverse navbar-fixex-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Promotores Ana</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-form navbar-right">
+                <a href="public/login.php">Login</a>
+            </div>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Promotores Ana</h1>
+        <p>La forma más fácil de gestionar tus pedidos</p>
+    </div>
 </div>
 </body>
 </html>
