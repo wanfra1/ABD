@@ -6,9 +6,14 @@ class BaseDatos {
     private $nombreBaseDatos = 'torrix_almacenes';
     private $charset = 'utf8';
     public $driverBaseDatos = NULL;
-    public function __construct() {
+     public function __construct() {
+        $url = 'mysql://b541f3c0cbb9c5:a76ce9cc@eu-cdbr-west-01.cleardb.com/heroku_4593dc1f0cb9e14?reconnect=true';
+        $server = $url["host"];
+        $username = $url["user"];
+        $password = $url["pass"];
+        $db = substr($url["path"], 1);
         try  {
-            $this->driverBaseDatos = new PDO("mysql:host=$this->urlBaseDatos;dbname=$this->nombreBaseDatos;charset=$this->charset", $this->usuario, $this->password);
+            $this->driverBaseDatos = new PDO("mysql:host=$server;dbname=$db;charset=$this->charset", $username, $password);
         } catch(PDOException $e) {
             echo __LINE__.$e->getMessage();
         }
