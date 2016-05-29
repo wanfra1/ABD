@@ -3,11 +3,15 @@
 class Ventas {
     public function todos() {
         $bd = new BaseDatos();
-        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre FROM `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN' );
+        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre, venta.estado FROM `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN' );
+    }
+    public function porReferencia($referencia) {
+        $bd = new BaseDatos();
+        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre, venta.estado FROM `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN WHERE venta.referencia = "'.$referencia.'"');
     }
     public function guardar($almacen, $descripcion, $productosExistentes, $cliente) {
         $bd = new BaseDatos();
-        $query = 'INSERT INTO `stock_venta` (ID, ID_ALMACEN, DESCRIPCION, cliente, referencia) VALUES (NULL, '.$almacen.', "'.$descripcion.'", '.$cliente.', "'.uniqid().'")';
+        $query = 'INSERT INTO `stock_venta` (ID, ID_ALMACEN, DESCRIPCION, cliente, referencia, estado) VALUES (NULL, '.$almacen.', "'.$descripcion.'", '.$cliente.', "'.rand(0, 10000).'", "FACTURADA")';
         $result = $bd->insertarConId($query);
         foreach ($productosExistentes as $i=>$producto) {
             $bd->getQuery('INSERT INTO `stock_lineaventa` (ID_VENTA, ID_PRODUCTO, UNIDADES) VALUES ('.$result.', '.$producto['producto'].', '.$producto['cantidad'].')');
@@ -35,5 +39,9 @@ class Ventas {
             }
             $bd->getQuery('DELETE FROM `stock_venta` WHERE ID='.$id);
         }
+    }
+    public function productosVenta($referencia) {
+        $bd = new BaseDatos();
+        return $bd->getQuery('SELECT producto.nombre, lineaventa.unidades FROM `stock_lineaventa` AS lineaventa INNER JOIN `stock_producto` AS producto ON producto.ID = lineaventa.id_producto WHERE lineaventa.id_venta = (select id from stock_venta where referencia="'.$referencia.'")' );
     }
 }

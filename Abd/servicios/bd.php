@@ -3,7 +3,7 @@ class BaseDatos {
     private $urlBaseDatos = 'localhost';
     private $usuario = 'root';
     private $password = '';
-    private $nombreBaseDatos = 'torrix_almacenes';
+    private $nombreBaseDatos = 'ana';
     private $charset = 'utf8';
     public $driverBaseDatos = NULL;
     public function __construct() {

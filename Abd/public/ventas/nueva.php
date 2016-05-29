@@ -1,19 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Registrar venta</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-<h1 class="page-header col-md-12">NUEVA VENTA</h1>
 <?php include '../../servicios/bd.php';?>
 <?php include '../../servicios/ventas.php';?>
 <?php include '../../servicios/almacenes.php';?>
 <?php include '../../servicios/productos.php';?>
 <?php include '../../servicios/clientes.php';?>
 <?php
-
+    session_start();
+    if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
+        header('Location: accede.php');
+    }
     function opcionesProducto($seleccionado) {
         $productos = new Productos();
         $opciones = '';
@@ -83,46 +85,76 @@
         }
     }
 ?>
-<div id="divForm">
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Promotores Ana</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="lista.php">Ventas</a></li>
+                <li><a href="#">Clientes</a></li>
+                <li><a href="#">Productos</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../logout.php">Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1 class="page-header col-md-12">Nueva venta</h1>
     <form id="venta" onsubmit="return validarVenta()" method="post" action="nueva.php" enctype="multipart/form-data">
         <div>
             <span id="errorProductoVacio"></span>
         </div>
-        <label id="label_descripcion" for="descripcion">Descripcion:</label>
-        <input class="inputSelect" type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
-        <span id="erroresDescripcion"><?php echo $errorDescripcion; ?></span>
-        <label id="label_almacen" for="almacen">Almacén:</label>
-        <select id="almacen" name="almacen" class="inputSelect">
-            <?php
-            $almacenes = new Almacenes();
-            $todos = $almacenes->todos();
-            echo '<option value="">Seleccione una opción</option>';
-            foreach ($todos as $row) {
-                if ($row[0] == $almacen) {
-                    echo '<option value="'.$row[0].'" selected>'.$row[1].'</option>';
-                } else {
-                    echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+        <div class="form-group <?php if ($errorDescripcion != '') echo 'has-error' ?>">
+            <label id="label_descripcion" for="descripcion">Descripcion:</label>
+            <input class="form-control" type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
+            <span id="erroresDescripcion" class="help-block"><?php echo $errorDescripcion; ?></span>
+        </div>
+        <div class="form-group <?php if ($errorAlmacen != '') echo 'has-error' ?>">
+            <label id="label_almacen" for="almacen">Almacén:</label>
+            <select id="almacen" name="almacen" class="form-control">
+                <?php
+                $almacenes = new Almacenes();
+                $todos = $almacenes->todos();
+                echo '<option value="">Seleccione una opción</option>';
+                foreach ($todos as $row) {
+                    if ($row[0] == $almacen) {
+                        echo '<option value="'.$row[0].'" selected>'.$row[1].'</option>';
+                    } else {
+                        echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                    }
                 }
-            }
-            ?>
-        </select>
-        <span id="erroresAlmacen"><?php echo $errorAlmacen; ?></span>
-        <label id="label_cliente" for="cliente">Cliente:</label>
-        <select id="cliente" name="cliente" class="inputSelect">
-            <?php
-            $clientes = new Clientes();
-            $todos = $clientes->todos();
-            echo '<option value="">Seleccione una opción</option>';
-            foreach ($todos as $row) {
-                if ($row[0] == $almacen) {
-                    echo '<option value="'.$row[0].'" selected>'.$row[1].'</option>';
-                } else {
-                    echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                ?>
+            </select>
+            <span id="erroresAlmacen" class="help-block"><?php echo $errorAlmacen; ?></span>
+        </div>
+        <div class="form-group <?php if ($errorCliente != '') echo 'has-error' ?>">
+            <label id="label_cliente" for="cliente">Cliente:</label>
+            <select id="cliente" name="cliente" class="form-control">
+                <?php
+                $clientes = new Clientes();
+                $todos = $clientes->todos();
+                echo '<option value="">Seleccione una opción</option>';
+                foreach ($todos as $row) {
+                    if ($row[0] == $almacen) {
+                        echo '<option value="'.$row[0].'" selected>'.$row[1].'</option>';
+                    } else {
+                        echo '<option value="'.$row[0].'">'.$row[1].'</option>';
+                    }
                 }
-            }
-            ?>
-        </select>
-        <span id="erroresClientes"><?php echo $errorCliente; ?></span>
+                ?>
+            </select>
+            <span id="erroresClientes" class="help-block"><?php echo $errorCliente; ?></span>
+        </div>
         <div id="divProductos" class="divProductos">
             <?php
                 foreach ($productosExistentes as $i=>$producto) {
@@ -159,7 +191,7 @@
         </div>
         <input type="hidden" id="numRepeticiones" name="numRepeticiones" value="0">
         <div id="divSubmit">
-            <input class="button" id="submit" type="submit" value="Enviar">
+            <input class="btn btn-primary" id="submit" type="submit" value="Enviar">
         </div>
     </form>
 </div>
