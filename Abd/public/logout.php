@@ -1,3 +1,5 @@
 <?php
+    session_start();
+    $_SESSION['valid'] = false;
     session_destroy();
-    header('Location: home.php');
+    header('Location: ../index.php');
