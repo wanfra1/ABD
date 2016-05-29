@@ -23,6 +23,13 @@ class BaseDatos {
             echo __LINE__.$e->getMessage();
         }
     }
+    public function protegidaInjection($sql, $params) {
+        $stmt = $this->driverBaseDatos->prepare($sql);
+        $stmt->execute($params);
+        $resultado = $stmt->fetchAll();
+        return $resultado;
+    }
+
     public function getQuery($sql) {
         $stmt = $this->driverBaseDatos->query($sql);
         return $stmt;
