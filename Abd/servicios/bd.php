@@ -6,8 +6,13 @@ class BaseDatos {
     private $nombreBaseDatos = 'ana';
     private $charset = 'utf8';
     public $driverBaseDatos = NULL;
+<<<<<<< HEAD
    public function __construct() {
         $url = 'mysql://b541f3c0cbb9c5:a76ce9cc@eu-cdbr-west-01.cleardb.com/heroku_4593dc1f0cb9e14?reconnect=true';
+=======
+    public function __construct() {
+        $url = parse_url('mysql://b541f3c0cbb9c5:a76ce9cc@eu-cdbr-west-01.cleardb.com/heroku_4593dc1f0cb9e14?reconnect=true');
+>>>>>>> 6e75a76a091c459e4cca37d6fd49ebbb7898a9fc
         $server = $url["host"];
         $username = $url["user"];
         $password = $url["pass"];
