@@ -24,8 +24,8 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="lista.php">Ventas</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li><a href="#">Productos</a></li>
+                    <li><a href="../stock/lista.php">Stock</a></li>
+                    <li><a href="../pedidos/nuevo.php">Pedidos</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../logout.php">Salir</a></li>
@@ -75,7 +75,7 @@
                         $todos = $ventas->todos();
                     }
                     foreach ($todos as $todo) {
-                        echo '<tr><td>'.$todo[0].'</td><td>'.$todo[1].'</td><td>'.$todo[2].'</td><td>'.$todo[3].'</td><td>'.$todo[4].'</td><td><form method="post" action="eliminar.php"><input type="hidden" name="id" value="'.$todo[0].'"><input class="btn btn-secondary" type="submit" name="eliminar" value="Eliminar"><a href="detalle.php?referencia='.$todo[1].'" class="btn btn-secondary">Ver</a></form></td></tr>';
+                        echo '<tr><td>'.$todo[0].'</td><td>'.$todo[1].'</td><td>'.$todo[2].'</td><td>'.$todo[3].'</td><td>'.$todo[4].'</td><td><form method="post" action="eliminar.php"><input type="hidden" name="id" value="'.$todo[0].'"><a href="detalle.php?referencia='.$todo[1].'" class="btn btn-secondary">Ver</a></form></td></tr>';
                     }
                 ?>
             </table>

@@ -24,8 +24,8 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="lista.php">Ventas</a></li>
-                <li><a href="#">Clientes</a></li>
-                <li><a href="#">Productos</a></li>
+                <li><a href="../stock/lista.php">Stock</a></li>
+                <li><a href="../pedidos/nuevo.php">Pedidos</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../logout.php">Salir</a></li>

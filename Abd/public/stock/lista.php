@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -6,19 +6,19 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
 </head>
 <body>
-<h1 class="page-header col-md-12">CONSULTAR STOCK</h1>
 <?php include '../../servicios/bd.php';?>
 <?php include '../../servicios/stock.php';?>
 <?php include '../../servicios/almacenes.php';?>
 <?php include '../../servicios/productos.php';?>
 
-<div id="listaStock">
+<div class="container">
+    <h1 class="page-header col-md-12">Consultar stock</h1>
     <?php
     if (isset($_GET['mensaje'])) {
         echo $_GET['mensaje'];
     }
     ?>
-    <table id="stock">
+    <table id="stock" class="table">
         <tr>
             <th>Almacen</th>
             <th>Producto</th>
