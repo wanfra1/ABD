@@ -7,7 +7,7 @@ class BaseDatos {
     private $charset = 'utf8';
     public $driverBaseDatos = NULL;
     public function __construct() {
-        $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+        $url = parse_url('mysql://bd3e283f2d14b6:8d036029@eu-cdbr-west-01.cleardb.com/heroku_19657bfbb867d65?reconnect=true');
         $server = $url["host"];
         $username = $url["user"];
         $password = $url["pass"];
