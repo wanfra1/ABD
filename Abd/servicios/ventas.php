@@ -3,11 +3,17 @@
 class Ventas {
     public function todos() {
         $bd = new BaseDatos();
-        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre, venta.estado FROM `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN' );
+        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre, venta.estado FROM'.
+            ' `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN '.
+            '`stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN' );
     }
     public function porReferencia($referencia) {
         $bd = new BaseDatos();
-        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre, venta.estado FROM `stock_venta` AS venta INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN WHERE venta.referencia = "'.$referencia.'"');
+        return $bd->getQuery('SELECT venta.descripcion, venta.referencia, almacen.nombre, cliente.nombre, venta.estado FROM '.
+            '`stock_venta` AS venta '.
+            'INNER JOIN `clientes` AS cliente ON cliente.ID = venta.cliente '.
+            'INNER JOIN `stock_almacen` AS almacen ON almacen.ID = venta.ID_ALMACEN '.
+            'WHERE venta.referencia = "'.$referencia.'"');
     }
     public function guardar($almacen, $descripcion, $productosExistentes, $cliente) {
         $bd = new BaseDatos();
