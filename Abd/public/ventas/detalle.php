@@ -37,6 +37,10 @@
 <div class="container">
     <h1 class="page-header col-md-12">Detalle de la venta</h1>
     <?php
+        session_start();
+        if (!isset($_SESSION['valid']) || $_SESSION['valid'] != true) {
+            header('Location: accede.php');
+        }
         $ventas = new Ventas();
         $venta = null;
         $porReferencia = $ventas->porReferencia($_GET['referencia']);

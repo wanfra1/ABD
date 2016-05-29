@@ -1,6 +1,7 @@
 <?php
 include '../servicios/bd.php';
 include '../servicios/usuarios.php';
+$errorLogin = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['username']) &&
         $_POST['username'] != '' &&
@@ -20,11 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $_POST['username'];
             header('Location: ventas/lista.php');
         } else {
-            echo 'Credenciales incorrectos';
-            echo md5($_POST['password']);
+            $errorLogin = 'Credenciales incorrectos';
         }
     } else {
-        echo 'Debes rellenar un usuario y contraseña';
+        $errorLogin = 'Credenciales incorrectos';
     }
 }
 ?>
@@ -52,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </nav>
         <div class="container">
+            <?php if ($errorLogin != '') {
+                echo '<div class="alert alert-warning">'.$errorLogin.'</div>';
+            }?>
             <form id="login" method="post" action="./login.php">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
