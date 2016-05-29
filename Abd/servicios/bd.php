@@ -7,8 +7,13 @@ class BaseDatos {
     private $charset = 'utf8';
     public $driverBaseDatos = NULL;
     public function __construct() {
+        $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+        $server = $url["host"];
+        $username = $url["user"];
+        $password = $url["pass"];
+        $db = substr($url["path"], 1);
         try  {
-            $this->driverBaseDatos = new PDO("mysql:host=$this->urlBaseDatos;dbname=$this->nombreBaseDatos;charset=$this->charset", $this->usuario, $this->password);
+            $this->driverBaseDatos = new PDO("mysql:host=$server;dbname=$db;charset=$this->charset", $username, $password);
         } catch(PDOException $e) {
             echo __LINE__.$e->getMessage();
         }
